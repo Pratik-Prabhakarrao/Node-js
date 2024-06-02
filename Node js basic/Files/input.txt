@@ -1,0 +1,1 @@
+thsi is the sample text file we are going to read using node js 
