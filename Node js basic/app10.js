@@ -2,10 +2,13 @@ const readline  = require('readline');
 const fs =  require('fs')
 const http  = require('http');
 
+
+const html = fs.readFileSync('./Templates/index.html','utf-8')
+
 // Create server
 
 const server = http.createServer((request,response)=>{
-    response.end('Hello from server') // for sending the response from the serer
+    response.end(html) // for sending the response from the serevr to client 
     console.log(request);
     console.log(response);
     console.log("a new request received");
