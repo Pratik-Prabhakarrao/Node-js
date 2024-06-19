@@ -1,6 +1,20 @@
 const fs = require('fs');
 let movies = JSON.parse(fs.readFileSync('./data/movies.json'));
 
+exports.checkId = ((req, res, next, value)=>{
+    console.log("Movie ID is " + value);
+    let movie = movies.find((el)=>{
+        return el.id === value*1; 
+    }) 
+
+    if(!movie){
+       return res.status(404).json({
+            status:"fail",
+            message:`Movie with ID ` + value + ` is not found`
+        })
+    }
+    next();    
+})
 
 //Route handler function
 exports.getAllMovies = (req, res)=>{
@@ -19,7 +33,7 @@ exports.getMovieWithId = (req, res)=>{
     const id = +req.params.id // convert the id into number as it is logged as string 
 
     //finding a movie based on the id parameter
-    movie = movies.find((el)=>{
+    let movie = movies.find((el)=>{
         return el.id === id; 
     }) 
 
